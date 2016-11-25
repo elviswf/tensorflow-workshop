@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 
+
 num_vectors = 1000
 num_clusters = 3
 num_steps = 100
@@ -56,7 +57,10 @@ update_centroids = tf.assign(centroids, means)
 init_op = tf.initialize_all_variables()
 
 # with tf.Session('local') as sess:
-sess = tf.Session()
+config = tf.ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.3
+sess = tf.InteractiveSession(config=config)
+
 sess.run(init_op)
 
 for step in xrange(num_steps):
@@ -76,3 +80,6 @@ sns.lmplot("x", "y", data=df,
            fit_reg=False, size=7,
            hue="cluster", legend=False)
 plt.savefig('kmeans2.png')
+sess.close()
+
+
