@@ -27,7 +27,7 @@ m1_input = tf.placeholder(tf.float32, shape=[4, 2])
 m2 = tf.Variable(tf.random_uniform([2, 3], -1.0, 1.0))
 
 m3 = tf.matmul(m1_input, m2)
-
+m4 = tf.add(m3, m3)
 # This is an identity op with the side effect of printing data when
 # evaluating.
 m3 = tf.Print(m3, [m3], message="m3 is: ")
@@ -45,5 +45,5 @@ with tf.Session() as session:
 
     feed_dict = {m1_input: m1}
 
-    result = session.run([m3], feed_dict=feed_dict)
-    print("\nresult: {}\n".format(result))
+    result1, result2 = session.run([m4, m3], feed_dict=feed_dict)
+    print("\nresult1: {}, \nresult2: {}\n".format(result1, result2))

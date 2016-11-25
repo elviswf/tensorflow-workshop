@@ -33,7 +33,6 @@ FLAGS = None
 
 
 def main(_):
-
     print("Downloading and reading data sets...")
     mnist = read_data_sets(FLAGS.data_dir, one_hot=True)
 
@@ -71,9 +70,10 @@ def main(_):
                                      feed_dict={x: mnist.test.images,
                                                 y_: mnist.test.labels}))
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_dir', type=str, default='/tmp/MNIST_data',
+    parser.add_argument('--data_dir', type=str, default='./MNIST_data',
                         help='Directory for storing data')
     parser.add_argument('--num_steps', type=int,
                         default=10000,
